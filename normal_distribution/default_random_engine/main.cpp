@@ -1,14 +1,15 @@
 #include <iostream>
 #include <sstream>
-#include <vector>
+#include <map>
 #include <random>
+#include <functional>
 
 int main(int argc, char *argv[])
 try
 {
-    if (argc != 3)
+    if (argc != 2)
     {
-        throw std::invalid_argument("Usage: maxSteps maxWords");
+        throw std::invalid_argument("Usage: maxSteps");
     }
 
     size_t maxSteps = 0;
@@ -19,10 +20,20 @@ try
 
     std::cout << "Max. steps: " << maxSteps << std::endl;
 
-    std::vector<size_t> data1(maxWords);
+
+    auto rng = std::bind(std::uniform_int_distribution<>(1, 10), std::default_random_engine{});
+
+    std::map<size_t, size_t> histogram;
 
     for (size_t step = 0; step < maxSteps; ++step)
     {
+        auto r = rng();
+        ++histogram[r];
+    }
+
+    for (auto it = histogram.begin(); it != histogram.end(); ++it)
+    {
+        std::cout << it->first << ": " << it->second << std::endl;
     }
 
     return EXIT_SUCCESS;
