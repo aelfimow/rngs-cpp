@@ -9,23 +9,23 @@ try
 {
     if (argc != 2)
     {
-        throw std::invalid_argument("Usage: maxSteps");
+        throw std::invalid_argument("Usage: maxNums");
     }
 
-    size_t maxSteps = 0;
+    size_t maxNums = 0;
     {
         std::stringstream ss { argv[1] };
-        ss >> maxSteps;
+        ss >> maxNums;
     }
 
-    std::cout << "Max. steps: " << maxSteps << std::endl;
+    std::cout << "Max. numbers: " << maxNums << std::endl;
 
 
     auto rng = std::bind(std::uniform_int_distribution<>(1, 10), std::default_random_engine{});
 
     std::map<size_t, size_t> histogram;
 
-    for (size_t step = 0; step < maxSteps; ++step)
+    for (size_t count = 0; count < maxNums; ++count)
     {
         auto r = rng();
         ++histogram[r];
