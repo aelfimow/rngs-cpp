@@ -21,13 +21,13 @@ try
     std::cout << "Max. numbers: " << maxNums << std::endl;
 
 
-    auto rng = std::bind(std::normal_distribution<size_t>(1, 20), std::default_random_engine{});
+    auto rng = std::bind(std::normal_distribution<double>{ 15.0, 4.0 }, std::default_random_engine{});
 
     std::map<size_t, size_t> histogram;
 
     for (size_t count = 0; count < maxNums; ++count)
     {
-        auto r = rng();
+        size_t r = static_cast<size_t>(rng());
         ++histogram[r];
     }
 
