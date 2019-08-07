@@ -31,9 +31,9 @@ try
         ++histogram[r];
     }
 
-    for (auto it = histogram.begin(); it != histogram.end(); ++it)
+    for (auto &h: histogram)
     {
-        std::cout << it->first << ": " << it->second << std::endl;
+        std::cout << h.first << ": " << h.second << std::endl;
     }
 
     return EXIT_SUCCESS;
